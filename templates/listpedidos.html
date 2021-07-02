@@ -103,7 +103,7 @@
  
 
 
-
+ {% block content %}
 
 
  
@@ -141,6 +141,8 @@
 </div>
 <!-- end about -->
 
+ 
+
 <div class="container">
       <div class="row">
       {% for social in a %}
@@ -162,7 +164,7 @@
  
 
 
-
+{% endblock %}
     
     <!-- footer -->
     <fooetr>
@@ -181,21 +183,32 @@
     <div class="overlay"></div>
     <!-- Javascript files-->
     <script>        
+   
       function myFunction() {
-       
+        var valorX = document.getElementById("qtd").value;
+        var valorY = document.getElementById("valor").value;
+        var resultado = parseInt(valorX) * parseFloat(valorY);
+        document.getElementById("subtotal").value = resultado;
       }
 
       function increase(){
         var a = 1;
-        var textBox = document.getElementById("text");
+        var textBox = document.getElementById("qtd");
         textBox.value++;
-        
+        myFunction()
+  
       }
 
       function decrease(){
-      var textBox = document.getElementById("text");
+        myFunction()
+      var textBox = document.getElementById("qtd");
+      if (textBox.value > 0){
         textBox.value--;
+        myFunction()
       }
+      }
+
+
 
 
 
