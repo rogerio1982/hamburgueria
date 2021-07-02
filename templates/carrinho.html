@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Delivery</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <!-- owl css -->
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- responsive-->
+    <link rel="stylesheet" href="static/css/responsive.css">
+    <!-- awesome fontfamily -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+
+<body class="main-layout">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="static/images/loading.gif" alt="" /></div>
+    </div>
+
+    <div class="wrapper">
+    <!-- end loader -->
+
+     <div class="sidebar">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+
+                <div id="dismiss">
+                    <i class="fa fa-arrow-left"></i>
+                </div>
+
+                <ul class="list-unstyled components">
+
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                      <a href="#">Pedidos </a>
+                  </li>
+                  <li>
+                      <a href="carrinho">Carrinho</a>
+                    </li>
+                  
+                    <li>
+                       
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+
+    <div id="content">
+    <!-- header -->
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="full">
+                        <a class="logo" href="/"><img src="{% for social in b %}
+                          {{social.imagens}}
+                      {% endfor %}" alt="#" /></a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="full">
+                        <div class="right_header_info">
+                            <ul>
+                                <li class="dinone"> Seja bem vindo à {% for social in b %}  {{social.nome}}  {% endfor %} </li>
+                                 <li class="button_user"><a class="button active" href="/">Continuar comprando {{cont}} Itens</a></li>
+
+                                <li>
+                                    <button type="button" id="sidebarCollapse">
+                                        <img src="static/images/menu_icon.png" alt="#">
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+    
+    <!-- footer -->
+    <fooetr>
+        <div class="footer">
+            <div class="container-fluid ">
+              
+                 
+
+<!-- Editable table -->
+ 
+<div class="card ">
+  <h2 > </h2>
+  <h2> Carrinho</h2>
+
+  <h3> Pedido: {{senha}} </h3>
+  
+      <table >
+        <thead>
+
+        </thead>
+        <tbody>
+         
+          <tr>
+            <td><span style="float:left;" ><h3>Produtos </h3></span></td>
+            <!--<td><span style="float:left;" ><h3>Valor </span></h3></td>-->
+            <td><span style="float:left;" ><h3>Quant. </span></h3></td>
+           <!-- <td><span style="float:left;" ><h3>Valor </span></h3></td>-->
+            
+            </tr>
+
+
+        {% for social in a %}
+        
+        <tr>
+          <form method="POST" name="form" action="apagar">
+            <td><span style="float:left;">  <h4>{{social.produtos}}</h4> </span></td>
+           <!-- <td><span style="float:left;" ><h4>{{social.valor | currencyFormat }}</h4> </span></td>-->
+            <td><span style="float:left;" ><h4>{{social.qtd}} <h4></span></td>
+           <!-- <td><span style="float:left;" ><h4> {{social.sub_total | currencyFormat }}</h4></span></td><br> -->  
+            <td><span class="table-remove">
+              
+                  <input type="hidden" value="{{social.id_venda}}" name="title">
+                  <input type="submit" onclick="myFunction()"  class="btn btn-danger btn-rounded btn-sm my-0" value="X">
+              </form> </td>  <br>      
+          </tr>
+        {% endfor %}
+
+        {% if val %}
+       
+        
+       <!--
+        <tr>
+          <td><span style="float:left;" > </span></td>
+          <td><span style="float:left;" > </span></td>
+          <td><span style="float:right;" ><h4> TOTAL : </h4></span></td>
+          <td><span style="float:left;" > <h4> {{val | currencyFormat }}</h4></span></td>
+
+          </tr>
+        -->
+          {% endif %}
+        </tbody>
+      </table>
+      <h4>TOTAL A PAGAR {{val | currencyFormat }}</h4>
+      
+<!-- Editable table 
+      <a href="https://api.whatsapp.com/send?phone=5591992566022&text=Ol%C3%A1!%20Seja%20bem-vindo%20(a)!" class="btn hero-btn">Enviar pedido</a>
+
+hidden="hidden"
+    -->
+     
+
+          <div class="card">
+                  {% for social in b %}
+                <textarea hidden="hidden" id="tel" name="tel" rows="4" cols="50">{{social.tel}}</textarea> <br>
+
+                  {% endfor %}
+                  <textarea hidden="hidden" id="pedido"  rows="4" cols="50">{{output}}</textarea> <br>
+                  <label ><h4>Nome: </h4></label>
+                  <textarea  id="nome"  rows="1" cols="50" placeholder="Digite seu nome.."></textarea><br>
+                  <label><h4>Pagamento:</h4></label>
+                  <select id="pag">
+                    <option value="Cartão">Cartão</option>
+                    <option value="Dinheiro">Diheiro</option>
+                    <option value="Pix">Pix</option>
+                  </select><br>
+                  <label ><h4>Endereço: </h4></label>
+                  <textarea  id="w3review3" name="w3review" rows="4" cols="50" placeholder="Digite o endereço para entrega.."></textarea><br>
+                  <!--<button class="btn btn-dark" href="/finalizar" onclick="enviarMensagem()">Finalizar pedido</button>-->
+                  
+                  <form name="form" action="/finalizar" method="GET" class="form-group">
+                    <button class="btn btn-success btn-lg btn-block" onclick="enviarMensagem()" >Enviar whats</button>
+                  </form>
+
+                  <label align="center"><h4>Após clicar em Finalizar pedido você será redirecionado para o whatsapp </h4></label>
+                  <div class="col-md-12">
+                   
+                     
+  
+                </div>
+          </div>
+
+
+    </div>
+  </div>
+
+
+
+
+<!-- Editable table -->
+
+        
+
+                    
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer_logo">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <div class="new">
+                            <h3></h3>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p>© 2021 todos os direitos reservaddor. Design by <a href="https://html.design/">IA</a></p>
+                </div>
+            </div>
+        </div>
+    </fooetr>
+    <!-- end footer -->
+
+    </div>
+    </div>
+    <div class="overlay"></div>
+    <!-- Javascript files-->
+
+    <script type="text/javascript">
+      function enviarMensagem(){
+        var texto = "Cliente: "+document.querySelector("#nome").value  +"\n"+ document.querySelector("#pedido").value +"\n"+ "pagamengo: "+document.querySelector("#pag").value  +"\n"+"Endereço:"+  document.querySelector("#w3review3").value;
+        texto = window.encodeURIComponent(texto);    
+        window.open("https://api.whatsapp.com/send?phone=" + "55"+document.querySelector("#tel").value + "&text=" + texto, "_blank");
+        
+        //Obs.. use "_system", no lugar de blank, caso você esteja usando Phonegap / Cordova / Ionic ou qualquer um baseado em webview;
+      }
+
+     
+
+      
+    </script>
+
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/owl.carousel.min.js"></script>
+    <script src="static/js/custom.js"></script>
+     <script src="static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    
+     <script src="static/js/jquery-3.0.0.min.js"></script>
+   <script type="text/javascript">
+        $(document).ready(function() {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#dismiss, .overlay').on('click', function() {
+                $('#sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').addClass('active');
+                $('.overlay').addClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+    <style>
+    #owl-demo .item{
+        margin: 3px;
+    }
+    #owl-demo .item img{
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    </style>
+
+     
+      <script>
+         $(document).ready(function() {
+           var owl = $('.owl-carousel');
+           owl.owlCarousel({
+             margin: 10,
+             nav: true,
+             loop: true,
+             responsive: {
+               0: {
+                 items: 1
+               },
+               600: {
+                 items: 2
+               },
+               1000: {
+                 items: 5
+               }
+             }
+           })
+         })
+      </script>
+
+</body>
+
+</html>
