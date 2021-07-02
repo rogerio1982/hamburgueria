@@ -21,16 +21,8 @@ app.config["DEBUG"] = True
 app.secret_key = "any random string"
 
 
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="root",#"root",
-    password="",#"102030aa",
-    hostname="localhost",#"rogeriosi.mysql.pythonanywhere-services.com",
-    databasename="hamburgueria",#"rogeriosi$rede_social",
-)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hamb.db'
 
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
@@ -57,7 +49,7 @@ class emp(db.Model):
     __tablename__ = "empresa"
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(4096))
-    tel = db.Column(db.DateTime)
+    tel = db.Column(db.String(4096))
     imagens = db.Column(db.String(4096))
     login = db.Column(db.String(4096))
     senha = db.Column(db.String(4096))
@@ -335,7 +327,6 @@ def upload_image():
         db.session.commit()
         
     '''
-
     tam=request.form.getlist("users")
     tam2 = ','.join(tam)
     print ("tam2: "+tam2)
@@ -399,90 +390,6 @@ def apagarcat():
     catt = cat.query.all() 
     
     return render_template("cad_categoria.html", a=dados, b=dados2, catt=catt)
-
-#tamanho
-
-@app.route("/cad_tamanho", methods=["GET", "POST"])
-def cad_tamanho():
-         
-    dados = prod.query.all()
-    dados2 = emp.query.all() 
-    catt = cat.query.all() 
-    tam = tamanho.query.all() 
-     
-    if request.method == "POST":
-        id_prod = request.form.get('id_prod')
-        tam = request.form.get('id_tam')
-        #print(tam+prod)        
-        
-        social = tamanho(id_prod=id_prod,
-                      tamanho=tam
-                      ) 
-        db.session.add(social)
-        db.session.commit()
-    tam = tamanho.query.all()
-
-
-    return render_template("cad_tamanho.html", a=dados, b=dados2, catt=catt,tam=tam )
-
-#apapar tam
-@app.route("/apagartam", methods=["POST"])
-def apagartam():
-   
-    dados = prod.query.all()
-    dados2 = emp.query.all()  
-    
-    if request.method == "POST":
-        nome = request.form.get("title")
-        social = tamanho.query.filter_by(id=nome).first()
-        db.session.delete(social)
-        db.session.commit()
-    
-    tam = tamanho.query.all()
-    
-    return render_template("cad_tamanho.html", a=dados, b=dados2, tam=tam)
-
-
-#tamanho
-
-@app.route("/cad_cor", methods=["GET", "POST"])
-def cad_cor():
-         
-    dados = prod.query.all()
-    dados2 = emp.query.all() 
-    cores = cor.query.all() 
-     
-    if request.method == "POST":
-        id_prod = request.form.get('id_prod')
-        co = request.form.get('id_cor')
-        #print(tam+prod)        
-        
-        social = cor(id_prod=id_prod,
-                      cor=co
-                      ) 
-        db.session.add(social)
-        db.session.commit()
-    cores = cor.query.all()
-
-
-    return render_template("cad_cor.html", a=dados, b=dados2, cor=cores )
-
-#apapar cor
-@app.route("/apagarcor", methods=["POST"])
-def apagarcor():
-   
-    dados = prod.query.all()
-    dados2 = emp.query.all()  
-    
-    if request.method == "POST":
-        nome = request.form.get("title")
-        social = cor.query.filter_by(id=nome).first()
-        db.session.delete(social)
-        db.session.commit()
-    
-    cores = cor.query.all()
-    
-    return render_template("cad_cor.html", a=dados, b=dados2, cor=cores)
 
 
 ##pedidos
@@ -559,8 +466,5 @@ def login():
 
 
 
-if __name__ == '__main__':
-    #app.run(debug=True)
-    app.run(host="192.168.0.107",port=5000)
-    
-    app.secret_key = "123"
+app.run(debug=True,host='0.0.0.0', port='8080')
+app.secret_key = "123"
