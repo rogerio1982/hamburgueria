@@ -124,21 +124,24 @@ hidden="hidden"
                 <textarea hidden="hidden" id="tel" name="tel" rows="4" cols="50">{{social.tel}}</textarea> <br>
 
                   {% endfor %}
-                  <textarea hidden="hidden" id="pedido"  rows="4" cols="50">{{output}}</textarea> <br>
-                  <label ><h4>Nome: </h4></label>
-                  <textarea  id="nome"  rows="1" cols="50" placeholder="Digite seu nome.."></textarea><br>
-                  <label><h4>Pagamento:</h4></label>
-                  <select id="pag">
-                    <option value="Cartão">Cartão</option>
-                    <option value="Dinheiro">Diheiro</option>
-                    <option value="Pix">Pix</option>
-                  </select><br>
-                  <label ><h4>Endereço: </h4></label>
-                  <textarea  id="w3review3" name="w3review" rows="4" cols="50" placeholder="Digite o endereço para entrega.."></textarea><br>
-                  <!--<button class="btn btn-dark" href="/finalizar" onclick="enviarMensagem()">Finalizar pedido</button>-->
+                    <form name="form" action="/finalizar" method="GET" class="form-group">
+
+                            <textarea hidden="hidden" id="pedido"  rows="4" cols="50">{{output}}</textarea> <br>
+                            <label ><h4>Nome: </h4></label>
+                            <textarea  id="nome"  rows="1" cols="50" placeholder="Digite seu nome.." required></textarea><br>
+                            <label><h4>Pagamento:</h4></label>
+                            <select id="pag">
+                              <option value="Cartão">Cartão</option>
+                              <option value="Dinheiro">Diheiro</option>
+                              <option value="Pix">Pix</option>
+                            </select><br>
+                            <label ><h4>Endereço: </h4></label>
+                            <textarea  id="ende" name="ende" rows="4" cols="50" placeholder="Digite o endereço para entrega.."required></textarea><br>
+                            <!--<button class="btn btn-dark" href="/finalizar" onclick="enviarMensagem()">Finalizar pedido</button>-->
                   
-                  <form name="form" action="/finalizar" method="GET" class="form-group">
+                
                     <button class="btn btn-success btn-lg btn-block" onclick="enviarMensagem()" >Enviar whats</button>
+                   
                   </form>
 
                   <label align="center"><h4>Após clicar em Finalizar pedido você será redirecionado para o whatsapp </h4></label>
@@ -178,11 +181,7 @@ hidden="hidden"
                     </div>
                 </div>
             </div>
-            <div class="copyright">
-                <div class="container">
-                    <p>© 2021 todos os direitos reservaddor. Design by <a href="https://html.design/">IA</a></p>
-                </div>
-            </div>
+            
         </div>
     </fooetr>
     <!-- end footer -->
@@ -194,11 +193,22 @@ hidden="hidden"
 
     <script type="text/javascript">
       function enviarMensagem(){
-        var texto = "Cliente: "+document.querySelector("#nome").value  +"\n"+ document.querySelector("#pedido").value +"\n"+ "pagamengo: "+document.querySelector("#pag").value  +"\n"+"Endereço:"+  document.querySelector("#w3review3").value;
+       var texto;
+       
+       
+       if (document.querySelector("#nome").value =="" )
+       {
+
+       }else if (document.querySelector("#ende").value ==""){
+      
+      }else{
+
+         texto = "Cliente: "+document.querySelector("#nome").value  +"\n"+ document.querySelector("#pedido").value +"\n"+ "pagamengo: "+document.querySelector("#pag").value  +"\n"+"Endereço:"+  document.querySelector("#ende").value;
         texto = window.encodeURIComponent(texto);    
         window.open("https://api.whatsapp.com/send?phone=" + "55"+document.querySelector("#tel").value + "&text=" + texto, "_blank");
-        
+       }
         //Obs.. use "_system", no lugar de blank, caso você esteja usando Phonegap / Cordova / Ionic ou qualquer um baseado em webview;
+      
       }
 
      

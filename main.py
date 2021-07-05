@@ -395,20 +395,21 @@ def apagarcat():
 
 
 ##pedidos
-
-@app.route("/cad_pedidos", methods=["GET", "POST"])
-def cat_pedid():
+ROWS_PER_PAGE = 5
+@app.route("/cad_pedidos", methods=["GET"])
+def cat_pedidos():
     if not session.get('logged_in'):
             dados = prod.query.all()
             dados2 = emp.query.all()
             catt = cat.query.all()
             return render_template("login.html", a=dados, b=dados2, catt=catt)
     else:
-        dados = pedidos.query.all()
-        
-        
+        #dados = pedidos.query.all() 
         dados2 = emp.query.all()
         catt = cat.query.all() 
+
+        page = request.args.get('page', 1, type=int)
+        dados = pedidos.query.paginate(page=page, per_page=ROWS_PER_PAGE)
         return render_template("cad_pedidos.html", a=dados, b=dados2, catt=catt)
 
 

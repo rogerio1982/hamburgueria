@@ -9,8 +9,6 @@ idna==2.10
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
-marshmallow==2.21.0
-marshmallow-sqlalchemy==0.19.0
 mysql-connector-python-rf==2.2.2
 PyJWT==1.7.1
 PyMySQL==0.10.1
